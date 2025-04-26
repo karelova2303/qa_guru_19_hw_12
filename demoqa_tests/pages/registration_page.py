@@ -20,24 +20,25 @@ class RegistrationPage():
         self.state = browser.element('#state')
         self.city = browser.element('#city')
         self.states_and_cities = browser.all('[id^=react-select][id*=option]')
+        self.submit = browser.element('#submit')
 
     def open(self):
         browser.open('/automation-practice-form')
 
     def fill_first_name(self, value):
-        self.first_name.should(be.blank).type(value)
+        self.first_name.type(value)
 
     def fill_last_name(self, value):
-        self.last_name.should(be.blank).type(value)
+        self.last_name.type(value)
 
     def fill_email(self, value):
-        self.email.should(be.blank).type(value)
+        self.email.type(value)
 
     def select_gender(self, value):
         self.gender.element_by(have.value(value)).element('..').click()
 
     def fill_mobile_number(self, value):
-        self.number.should(be.blank).type(value)
+        self.number.type(value)
 
     def fill_date_of_birth(self, date_of_birth):
         self.dateOfBirthInput.send_keys(Keys.CONTROL + "A")
@@ -54,7 +55,7 @@ class RegistrationPage():
         self.file.send_keys(resource.path_file(value))
 
     def fill_current_address(self, value):
-        self.address.should(be.blank).type(value)
+        self.address.type(value)
 
     def select_state(self, value):
         self.state.click()
@@ -64,8 +65,8 @@ class RegistrationPage():
         self.city.click()
         self.states_and_cities.element_by(have.exact_text(value)).click()
 
-    def click_submit(self):
-        browser.element('#submit').click()
+    def submit_form(self):
+        self.submit.click()
 
     def fill_registration_form(self, user: User):
         self.fill_first_name(user.first_name)
@@ -80,7 +81,7 @@ class RegistrationPage():
         self.fill_current_address(user.address)
         self.select_state(user.state)
         self.select_city(user.city)
-        self.click_submit()
+        self.submit_form()
 
     def should_title_registered_the_form(self):
         title_registered = 'Thanks for submitting the form'
