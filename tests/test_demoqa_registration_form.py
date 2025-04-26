@@ -13,9 +13,11 @@ def test_registration_form(setup_browser):
     with allure.step('Открываем страницу для заполнения формы регистрации'):
         registration_page.open()
 
+    #WHEN
     with allure.step(f'Заполняем форму регистрации данными пользователя "{student_filatova.last_name}"'):
         registration_page.fill_registration_form(student_filatova)
 
+    # THEN
     with allure.step('Подтверждение успешной регистрации пользователя'):
         registration_page.should_title_registered_the_form()
 
